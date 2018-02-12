@@ -2,21 +2,27 @@
   "name": "task-matrix",
   "version": "0.0.0",
   "description": "A simple web based application to organise todo lists using the Eisenhower Matrix technique.",
-  "main": "index.js",
+  "main": "app/index.js",
   "dependencies": {
     "chai": "^4.1.2",
     "express": "^4.16.2",
+    "request": "^2.83.0",
     "requests": "^0.2.2"
   },
   "devDependencies": {
     "mocha": "^5.0.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "keywords": [
     "npm"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AishwaryaKaliki/task-matrix.git"
+  },
   "author": "AishwaryaKaliki",
-  "license": "MIT"
+  "license": "MIT",
+  "private": true
 }

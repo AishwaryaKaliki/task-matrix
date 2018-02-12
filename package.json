@@ -1,6 +1,6 @@
 {
   "name": "task-matrix",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A simple web based application to organise todo lists using the Eisenhower Matrix technique.",
   "main": "app/index.js",
   "dependencies": {

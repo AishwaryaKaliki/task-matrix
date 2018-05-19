@@ -36,7 +36,7 @@ This is an application implementing the Eisenhower Matrix technique for prioriti
 
 ### Features
     * Login Page, available at localhost:3000/
-    * User's tasklist, available at localhost:3000/<username>
+    * User's tasklist, available at localhost:3000/account/<username>
 
 ### Working on:    
     * Connecting the Login to the User's task list.
@@ -46,5 +46,6 @@ This is an application implementing the Eisenhower Matrix technique for prioriti
     * Persisting data.
     * Labels for tasks.
     * Progress bars: tasks left and tasks completed.
+    * Reordering of tasks.
     * Other styles and formatting.
 

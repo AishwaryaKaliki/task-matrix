@@ -37,13 +37,14 @@ This is an application implementing the Eisenhower Matrix technique for prioriti
 ### Features
     * Login Page, available at localhost:3000/
     * User's tasklist, available at localhost:3000/account/<username>
+    * Persisted state using json-server.
+    * Adding tasks, deleting tasks.
+    * Autosave after 5 seconds of idleness, using react-idle-timer.
 
 ### Working on:    
     * Connecting the Login to the User's task list.
-    * Adding tasks, and task editing buttons.
     * Adding a button to create new lists for a user.
     * Creating users/accounts.
-    * Persisting data.
     * Labels for tasks.
     * Progress bars: tasks left and tasks completed.
     * Reordering of tasks.

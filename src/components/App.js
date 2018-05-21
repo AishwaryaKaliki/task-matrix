@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import 'whatwg-fetch'
 import '../styles/App.css';
 import { Sidebar, Segment, Menu, Image, Header, List, Grid  } from 'semantic-ui-react'
+import IdleTimer from 'react-idle-timer';
 import TaskList from './TaskList';
 import TaskCategory from './TaskCategory';
 import Quote from './Quote';
@@ -9,6 +10,7 @@ import {getQuoteOfTheDay} from '../helper'
 
 class App extends Component {
   state = {
+    id: 0,
     displayName: "",
     avatar: "",
     lists: [],
@@ -21,7 +23,7 @@ class App extends Component {
     const user = this.props.match.params.username
     fetch("http://localhost:3001/accounts?username="+user)
     .then(response => response.json())
-    .then(json => json.length > 0 ? this.setState({avatar: "/assets/" + user + ".png", displayName: json[0].name, lists: json[0].data, quote: getQuoteOfTheDay()}) : this.props.history.push(`/notfound`))
+    .then(json => json.length > 0 ? this.setState({id: json[0].id, avatar: "/assets/" + user + ".png", displayName: json[0].name, lists: json[0].data, quote: getQuoteOfTheDay()}) : this.props.history.push(`/notfound`))
     .catch(function(ex) {
       console.log('Parsing Failed...', ex)
     })
@@ -45,11 +47,30 @@ class App extends Component {
     this.setState({ lists })
   }
 
-  render() {
-    const { toggleSidebar } = this.state
+  autosave = () => {
+    const user = this.props.match.params.username
+    fetch("http://localhost:3001/accounts/" + this.state.id, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          "username": this.state.username,
+          "name": this.state.displayName,
+          "data": this.state.lists
+      })
+    }).then(function(response) {
+      return response.json()
+    }).catch(function(ex) {
+      console.log('parsing failed: ', ex)
+    });
+  }
 
+  render() {
     return (
     <Fragment>
+      <IdleTimer ref="saveTimer" timeout={5000} startOnLoad={false} idleAction={this.autosave}>
       <Menu icon size='large' style={{marginBottom: "0"}}>
         <Menu.Item name='sidebar-toggle' onClick={this.toggleSidebarVisibility}>
         <Header as='h4'>
@@ -61,7 +82,7 @@ class App extends Component {
         </Menu.Item>
       </Menu>
       <Sidebar.Pushable as={Segment} style={{height: "90%", marginTop: "0"}}>
-          <Sidebar as={Segment} animation='slide along' visible={toggleSidebar} icon='labeled' vertical>
+          <Sidebar as={Segment} animation='slide along' visible={this.state.toggleSidebar} icon='labeled' vertical>
             <Quote quote={this.state.quote}/>
             <List selection divided relaxed verticalAlign='middle'>
                 { 
@@ -92,6 +113,7 @@ class App extends Component {
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
+        </IdleTimer>
     </Fragment>
     )
   }

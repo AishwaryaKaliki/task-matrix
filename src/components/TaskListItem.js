@@ -6,7 +6,7 @@ class TaskListItem extends Component {
     render () {
         return (
             <List.Item>
-                <List.Icon name='ellipsis vertical' size='large' verticalAlign='middle' />
+                <List.Icon name='ellipsis vertical' verticalAlign='middle' />
                 <List.Content>
                 <List.Header as='a'>{this.props.details}</List.Header>
                 <List.Description as='a'></List.Description>

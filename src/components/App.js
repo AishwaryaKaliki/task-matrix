@@ -33,6 +33,12 @@ class App extends Component {
     this.setState({currentList: parseInt(e.currentTarget.id,10)})
   }
 
+  addTask = (listIndex, task) => {
+    const lists = this.state.lists
+    lists[this.state.currentList].tasks[listIndex] =  [task, ...this.state.lists[this.state.currentList].tasks[listIndex]]
+    this.setState({ lists })
+  }
+
   render() {
     const { toggleSidebar } = this.state
 
@@ -62,18 +68,18 @@ class App extends Component {
               <Grid style={{height: "inherit"}} padded={false}> 
                 <Grid.Row columns={2} style={{height: "50%", padding: "0.1rem"}}>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Focus" description="Urgent and Important. Finish these ASAP." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={0} />
+                    <TaskCategory label="Focus" description="Urgent and Important. Finish these ASAP." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={0} addTask={this.addTask}/>
                   </Grid.Column>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Goals" description="Important but not Urgent. Plan them out and complete in a reasonable timeframe." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={1}/>
+                    <TaskCategory label="Goals" description="Important but not Urgent. Plan them out and complete in a reasonable timeframe." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={1} addTask={this.addTask}/>
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns={2} style={{height: "50%", padding: "0.1rem"}}>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Fit In" description="Urgent but not Important. Schedule these into open slots." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={2}/>
+                    <TaskCategory label="Fit In" description="Urgent but not Important. Schedule these into open slots." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={2} addTask={this.addTask}/>
                   </Grid.Column>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Backburner" description="Not Urgent and Not Important. Keep in mind, and delegate whenever possible." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={3}/>
+                    <TaskCategory label="Backburner" description="Not Urgent and Not Important. Keep in mind, and delegate whenever possible." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={3} addTask={this.addTask}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>

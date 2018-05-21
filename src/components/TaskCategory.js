@@ -5,6 +5,10 @@ import TaskListItem from './TaskListItem.js'
 
 class TaskCategory extends Component {
 
+    populateList = (item,index) => {
+        return (<TaskListItem details={item} key={index} taskIndex={index} taskCategoryKey={this.props.taskCategoryKey} deleteTask={this.props.deleteTask} />)
+    }
+    
     addTask = (event) => {
          if (event.key === "Enter") { 
              this.props.addTask(this.props.taskCategoryKey, event.target.value)
@@ -23,15 +27,10 @@ class TaskCategory extends Component {
                     </Header.Subheader>
                 </Header>
                 <Input transparent fluid placeholder='Add Task...' onKeyPress={this.addTask}>
-                    <Icon name='ellipsis vertical' />
                     <input />
                 </Input>
                 <List divided relaxed>
-                {   
-                    taskList.map(function(item, index) {
-                        return (<TaskListItem details={item} key={index} />)
-                    })
-                }
+                {  taskList.map(this.populateList) }
                 </List>
             </Segment>
         )

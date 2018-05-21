@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import 'whatwg-fetch'
 import '../styles/App.css';
-import { Sidebar, Segment, Menu, Image, Header, List, Grid  } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Image, Header, List, Grid, Input  } from 'semantic-ui-react'
 import IdleTimer from 'react-idle-timer';
 import TaskList from './TaskList';
 import TaskCategory from './TaskCategory';
@@ -38,13 +38,26 @@ class App extends Component {
   addTask = (listIndex, task) => {
     const lists = this.state.lists
     lists[this.state.currentList].tasks[listIndex] =  [task, ...this.state.lists[this.state.currentList].tasks[listIndex]]
+    lists[this.state.currentList].pending += 1
     this.setState({ lists })
   }
 
   deleteTask = (listIndex, taskIndex) => {
     const lists = this.state.lists
     lists[this.state.currentList].tasks[listIndex].splice(taskIndex, 1)
+    lists[this.state.currentList].pending -= 1
     this.setState({ lists })
+  }
+
+  addTaskList = (event) => {
+    if ((event.key === "Enter") && (event.target.value !== '')) { 
+      this.setState({ lists: [{name: event.target.value, tasks:[[],[],[],[]], pending: 0}, ...this.state.lists] })
+      event.target.value = ''
+   }
+  }
+
+  deleteTaskList = (taskListIndex) => {
+    this.setState((prevState) => ({lists: prevState.lists.filter((_, i) => i !== taskListIndex)}));
   }
 
   autosave = () => {
@@ -84,13 +97,14 @@ class App extends Component {
       <Sidebar.Pushable as={Segment} style={{height: "90%", marginTop: "0"}}>
           <Sidebar as={Segment} animation='slide along' visible={this.state.toggleSidebar} icon='labeled' vertical>
             <Quote quote={this.state.quote}/>
+            <Input transparent fluid style={{marginLeft: "2em"}} placeholder='Add Task List...' onKeyPress={this.addTaskList} />
             <List selection divided relaxed verticalAlign='middle'>
                 { 
-                  this.state.lists.map((item, index) => (<TaskList key={index} index={index} details={item} setCurrentList={this.setCurrentList} />))
+                  this.state.lists.map((item, index) => (<TaskList key={index} index={index} details={item} setCurrentList={this.setCurrentList} deleteTaskList={this.deleteTaskList}/>))
                 }
             </List>
           </Sidebar>
-          <Sidebar.Pusher style={{height: "100%"}}>
+          <Sidebar.Pusher style={{height: "100%"}} onClick={() => this.setState({toggleSidebar: false})}>
             <Segment basic style={{height: "inherit"}}>
               <Grid style={{height: "inherit"}} padded={false}> 
                 <Grid.Row columns={2} style={{height: "50%", padding: "0.1rem"}}>

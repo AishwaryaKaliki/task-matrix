@@ -8,9 +8,9 @@ class TaskCategory extends Component {
     populateList = (item,index) => {
         return (<TaskListItem details={item} key={index} taskIndex={index} taskCategoryKey={this.props.taskCategoryKey} deleteTask={this.props.deleteTask} />)
     }
-    
+
     addTask = (event) => {
-         if (event.key === "Enter") { 
+         if ((event.key === "Enter") && (event.target.value !== '')) { 
              this.props.addTask(this.props.taskCategoryKey, event.target.value)
              event.target.value = ''
         }

@@ -37,7 +37,7 @@ class App extends Component {
 
   addTask = (listIndex, task) => {
     const lists = this.state.lists
-    lists[this.state.currentList].tasks[listIndex] =  [task, ...this.state.lists[this.state.currentList].tasks[listIndex]]
+    lists[this.state.currentList].tasks[listIndex] =  [{title: task, completed: false}, ...this.state.lists[this.state.currentList].tasks[listIndex]]
     lists[this.state.currentList].pending += 1
     this.setState({ lists })
   }
@@ -46,6 +46,12 @@ class App extends Component {
     const lists = this.state.lists
     lists[this.state.currentList].tasks[listIndex].splice(taskIndex, 1)
     lists[this.state.currentList].pending -= 1
+    this.setState({ lists })
+  }
+
+  setTaskStatus = (listIndex, taskIndex, completed) => {
+    const lists = this.state.lists
+    lists[this.state.currentList].tasks[listIndex][taskIndex].completed = completed
     this.setState({ lists })
   }
 
@@ -59,6 +65,7 @@ class App extends Component {
   deleteTaskList = (taskListIndex) => {
     this.setState((prevState) => ({lists: prevState.lists.filter((_, i) => i !== taskListIndex)}));
   }
+
 
   autosave = () => {
     const user = this.props.match.params.username
@@ -109,18 +116,18 @@ class App extends Component {
               <Grid style={{height: "inherit"}} padded={false}> 
                 <Grid.Row columns={2} style={{height: "50%", padding: "0.1rem"}}>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Focus" description="Urgent and Important. Finish these ASAP." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={0} color="#FF7E8A" addTask={this.addTask} deleteTask={this.deleteTask}/>
+                    <TaskCategory label="Focus" description="Urgent and Important. Finish these ASAP." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={0} color="#FF7E8A" addTask={this.addTask} deleteTask={this.deleteTask} setTaskStatus={this.setTaskStatus}/>
                   </Grid.Column>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Goals" description="Important but not Urgent. Plan them out and complete in a reasonable timeframe." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={1} color="#37FFAE" addTask={this.addTask} deleteTask={this.deleteTask}/>
+                    <TaskCategory label="Goals" description="Important but not Urgent. Plan them out and complete in a reasonable timeframe." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={1} color="#37FFAE" addTask={this.addTask} deleteTask={this.deleteTask} setTaskStatus={this.setTaskStatus}/>
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns={2} style={{height: "50%", padding: "0.1rem"}}>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Fit In" description="Urgent but not Important. Schedule these into open slots." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={2} color="#FFEE6B" addTask={this.addTask} deleteTask={this.deleteTask}/>
+                    <TaskCategory label="Fit In" description="Urgent but not Important. Schedule these into open slots." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={2} color="#FFEE6B" addTask={this.addTask} deleteTask={this.deleteTask} setTaskStatus={this.setTaskStatus}/>
                   </Grid.Column>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Backburner" description="Not Urgent and Not Important. Keep in mind, and delegate whenever possible." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={3} color="#00EAF5" addTask={this.addTask} deleteTask={this.deleteTask}/>
+                    <TaskCategory label="Backburner" description="Not Urgent and Not Important. Keep in mind, and delegate whenever possible." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={3} color="#00EAF5" addTask={this.addTask} deleteTask={this.deleteTask} setTaskStatus={this.setTaskStatus}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>

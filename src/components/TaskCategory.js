@@ -7,7 +7,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 class TaskCategory extends Component {
 
     populateList = (item,index) => {
-        return (<TaskListItem details={item} key={index} taskIndex={index} taskCategoryKey={this.props.taskCategoryKey} deleteTask={this.props.deleteTask} />)
+        return (<TaskListItem details={item} key={index} taskIndex={index} taskCategoryKey={this.props.taskCategoryKey} deleteTask={this.props.deleteTask} setTaskStatus={this.props.setTaskStatus}/>)
     }
 
     addTask = (event) => {

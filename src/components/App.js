@@ -109,18 +109,18 @@ class App extends Component {
               <Grid style={{height: "inherit"}} padded={false}> 
                 <Grid.Row columns={2} style={{height: "50%", padding: "0.1rem"}}>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Focus" description="Urgent and Important. Finish these ASAP." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={0} addTask={this.addTask} deleteTask={this.deleteTask}/>
+                    <TaskCategory label="Focus" description="Urgent and Important. Finish these ASAP." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={0} color="#FF7E8A" addTask={this.addTask} deleteTask={this.deleteTask}/>
                   </Grid.Column>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Goals" description="Important but not Urgent. Plan them out and complete in a reasonable timeframe." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={1} addTask={this.addTask} deleteTask={this.deleteTask}/>
+                    <TaskCategory label="Goals" description="Important but not Urgent. Plan them out and complete in a reasonable timeframe." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={1} color="#37FFAE" addTask={this.addTask} deleteTask={this.deleteTask}/>
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns={2} style={{height: "50%", padding: "0.1rem"}}>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Fit In" description="Urgent but not Important. Schedule these into open slots." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={2} addTask={this.addTask} deleteTask={this.deleteTask}/>
+                    <TaskCategory label="Fit In" description="Urgent but not Important. Schedule these into open slots." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={2} color="#FFEE6B" addTask={this.addTask} deleteTask={this.deleteTask}/>
                   </Grid.Column>
                   <Grid.Column stretched style={{padding: "0.2rem"}}>
-                    <TaskCategory label="Backburner" description="Not Urgent and Not Important. Keep in mind, and delegate whenever possible." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={3} addTask={this.addTask} deleteTask={this.deleteTask}/>
+                    <TaskCategory label="Backburner" description="Not Urgent and Not Important. Keep in mind, and delegate whenever possible." tasks={this.state.lists} taskListKey={this.state.currentList} taskCategoryKey={3} color="#00EAF5" addTask={this.addTask} deleteTask={this.deleteTask}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>

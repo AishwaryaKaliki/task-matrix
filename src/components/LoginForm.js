@@ -35,7 +35,7 @@ const LoginForm = () => (
               type='password'
             />
 
-            <Button style={{backgroundColor: '#4183c4', color: "white"}} fluid size='large'>Login</Button>
+            <Button style={{backgroundColor: '#FF7E8A', color: "white"}} fluid size='large'>Login</Button>
           </Segment>
         </Form>
         <Message>

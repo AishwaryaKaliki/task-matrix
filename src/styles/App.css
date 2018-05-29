@@ -17,3 +17,16 @@
 .App-intro {
   font-size: large;
 }
+
+.complete {
+    color: gray;
+    font-style: italic;
+    text-decoration: line-through solid grey;
+}
+.container {
+  -ms-overflow-style: none;  
+  overflow: -moz-scrollbars-none; 
+}
+.container::-webkit-scrollbar { 
+  display: none;
+}

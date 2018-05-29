@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import { Segment, List, Header, Input, Icon } from 'semantic-ui-react'
 import TaskListItem from './TaskListItem.js'
+import { Scrollbars } from 'react-custom-scrollbars';
 
 class TaskCategory extends Component {
 
@@ -19,7 +20,7 @@ class TaskCategory extends Component {
     render () {
         const taskList = (this.props && this.props.tasks && this.props.tasks.length > 0) ? this.props.tasks[this.props.taskListKey]["tasks"][this.props.taskCategoryKey]: []
         return (
-            <Segment style={{height: "50%"}}>
+            <Segment style={{height: "50%", borderLeft: "5px solid " + this.props.color}}>
                 <Header size='large' dividing>
                     {this.props.label}
                     <Header.Subheader>
@@ -32,6 +33,7 @@ class TaskCategory extends Component {
                 <List divided relaxed>
                 {  taskList.map(this.populateList) }
                 </List>
+
             </Segment>
         )
     }

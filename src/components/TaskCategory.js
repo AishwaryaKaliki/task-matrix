@@ -20,7 +20,7 @@ class TaskCategory extends Component {
     render () {
         const taskList = (this.props && this.props.tasks && this.props.tasks.length > 0) ? this.props.tasks[this.props.taskListKey]["tasks"][this.props.taskCategoryKey]: []
         return (
-            <Segment style={{height: "50%", borderLeft: "5px solid " + this.props.color}}>
+            <Segment style={{height: "50%", borderLeft: "5px solid " + this.props.color, overflow:"hidden"}}>
                 <Header size='large' dividing>
                     {this.props.label}
                     <Header.Subheader>
@@ -30,7 +30,7 @@ class TaskCategory extends Component {
                 <Input transparent fluid placeholder='Add Task...' onKeyPress={this.addTask}>
                     <input />
                 </Input>
-                <List divided relaxed>
+                <List divided relaxed style={{height:"160px",overflowY:"auto"}}>
                 {  taskList.map(this.populateList) }
                 </List>
 

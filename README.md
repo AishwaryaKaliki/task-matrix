@@ -43,7 +43,6 @@ This is an application implementing the Eisenhower Matrix technique for prioriti
 
 ### Working on:    
     * Connecting the Login to the User's task list.
-    * Adding a button to create new lists for a user.
     * Creating users/accounts.
     * Labels for tasks.
     * Progress bars: tasks left and tasks completed.
